@@ -14,7 +14,7 @@ background-repeat: no-repeat;
         #ayr1{
             display: none;
         }
-        #a1,#a2,#a3,#a4,#a5,#a6,#a7,#a8, #a9, #a10{
+        #a1,#a2,#a3,#a4,#a5,#a6,#a7,#a8, #a9, #a10, #tnfs{
             display: none;
             background-color: aqua;
             border-radius: 10%;
@@ -106,6 +106,7 @@ background-repeat: no-repeat;
         <button onclick="KLN1()">Kullan</button>
         <input type="range" max="18" min="8" id="byt"><button onclick="KLN2()">Yazı Boyutunu Değiştir.</button>
         <input type="color" id="renk"><button onclick="KLN3()">Olay ekranının rengini değiştir.</button>
+        <button onclick="KLN4()" id="hftsn1">Haftasonu zil ve tenefüs olsun.</button>
     </div>
     <div id="i1">
         <div id="kont1">
@@ -191,6 +192,13 @@ background-repeat: no-repeat;
         <button onclick="S62()" id="buttoncss">Kabul Etme (+2% oy, -1 itibar, -2% hocalarla anlaşma)</button>
         <button onclick="S63()" id="buttoncss">Sınıfa Bu Olayı Anlat (+4% oy, +2 itibar, -4% hocalarla anlaşma)</button>
     </div>
+    <div id="tnfs">
+        <h4 id="tenefus">Tenefüs geldi.Ne yapacaksın</h4>
+        <button onclick="KNT()" id="buttoncss">Kantine gidip sınıftakilere yemek dağıt.(+5 oy,+2 itibar, -1000 para)</button>
+        <button onclick="TRFSZ()" id="buttoncss">Gez.</button>
+        <button onclick="FTBL()" id="buttoncss">Futbol oyna. (%50 olasılıkla +3 oy)</button>
+        <button onclick="AKIN()" id="buttoncss">A şubesine AKIN DÜZENLE (30% olasılıkla kazanınca: +10 itibar,+20 oy, -50 hocalarla anlaşma,70% olasılıkla kaybedince:-10 itibar, -20 oy, -50 hocalarla anlaşma.UYARI:bu seçeneği işaretleyince çok sesli bir şekilde mehter çalar.).</button>
+    </div>
     <div id="dgr">
         <h3>Kim İle Konuşacaksın: </h4>
         <button onclick="K1()">Kerem'le Konuş</button>
@@ -234,6 +242,7 @@ background-repeat: no-repeat;
         <p id="ya">Yağızla Anlaşma:30 (Dost. 20'ın altında düşman olur.)</p>
         <button onclick="YS1()">Aga Yardım et ingilizceyi falan boş ver.</button>
         <button onclick="YS2()">Yagiz, can you gather your friends?(Yağız, Arkadaşlarını Toplayabilirmisin? +4 itibar -5 kerem ile anlaşma)</button>
+        <button onclick="YS3()">Yağız türkçe biliyormusun?</button>
         <button onclick="SR3()">By By Yagiz</button>
         <p id="ycvp">Yağız: Hello I'm Yagiz Izzet.How Are You?</p>
     </div>
@@ -248,6 +257,7 @@ background-repeat: no-repeat;
         <button onclick="FS1()">Furkan sen çok örnek bir öğrencisin (-8% hocalarla anlaşma .d,-2 itibar +2 Furkanla anlaşma, +1 Yağızla Anlaşma.).</button>
         <button onclick="FS2()">Furkan uslu dur (+2% hocalarla anlaşma, +2 itibar -3 Furkanla anlaşma.).</button>
         <button onclick="FS3()">Furkan yardım edermisin? (-10% hocalarla anlaşma, +3 itibar minimum 90 Furkanla anlaşma.)</button>
+        <button onclick="FS4()">Furkan en sevmediğin hoca kim?</button>
         <button onclick="SR3()">Görüşürüz Furkan</button>
         <p id="fcvp">Furkan: He</p>
     </div>
@@ -260,6 +270,7 @@ background-repeat: no-repeat;
     var esegim = "y";
     var ki = 50;
     var mi = 100;
+    var p = 0;
     var öi = 15;
     var yi = 30;
     var ha = 50;
@@ -268,22 +279,56 @@ background-repeat: no-repeat;
     var destekyz = "yk";
     var pkt1 = document.getElementById("pkt1");
     var tklm1 = "yk";
+    var tklm2 = "yk";
     var prj1 = "yk";
     var date = new Date();
     var gun = date.getDay();
-    var ay = date.getFullYear();
-    var yil = date.getMonth();
+    var ay = date.getMonth();
+    var yil = date.getFullYear();
     var saat = date.getHours();
     var dakika = date.getMinutes();
     setInterval(function(){
-        if(gun == 0 || gun == 6){
+        if((gun == 0 || gun == 6) && tklm2 == "yk"){
         console.log("bugün okul yok niye oynuyorsun? şaka şaka sadece okul olmadığından zil çalmadı.");
         }
-        else{
-var zil = new Audio("zil.mp3");
+        else if(gun > 0 && gun < 6){
+            var random6 = Math.random();
+            var random10 = Math.random();
+            var zil = new Audio("zil.mp3");
 zil.play();
+document.getElementById("tnfs").style.display = "block";
+if(random6 > 0.6){
+    var soru3 = prompt("Kerem: " + navigator.userAgent + " Tarayıcısını kullanan kişi yada oyundaki adıyla huzeyfe oyunda birşey bozuldu yardım et. </html> yaz tıpatıp aynısını yaz.");
+    if(soru3 == "</html>"){
+        öi += 5;
+        document.getElementById("oa").innerHTML = öi;
+        alert("Kerem: teşekkür ederim.");
+    }
+    else{
+        alert("Kerem: Oyun bozuldu huzeyfe.ancak ben senin yerine düzelttim.");
+    }
+}
         }
-    }, 300000);
+        else if((gun == 0 || gun == 6) && tklm2 == "evt"){
+            var random6 = Math.random();
+            var random10 = Math.random();
+            var zil = new Audio("zil.mp3");
+zil.play();
+
+document.getElementById("tnfs").style.display = "block";
+if(random6 > 0.6){
+    var soru3 = prompt("Kerem: " + navigator.userAgent + " Tarayıcısını kullanan kişi yada oyundaki adıyla huzeyfe oyunda birşey bozuldu yardım et. </html> yaz tıpatıp aynısını yaz.");
+    if(soru3 == "</html>"){
+        öi += 5;
+        document.getElementById("oa").innerHTML = öi;
+        alert("Kerem: teşekkür ederim.");
+    }
+    else{
+        alert("Kerem: Oyun bozuldu huzeyfe.ancak ben senin yerine düzelttim.");
+    }
+}
+        }
+    }, 180000);
     var gunyazi;
     if(gun == 0){
 gunyazi = "Pazar";
@@ -316,6 +361,7 @@ tiklama.play();
         else if (tklm1 == "evt"){
             var tiklama = new Audio("tiklama.mp3");
 tiklama.play();
+
             tklm1 = "yk";
             document.getElementById("ayr1").style.display = "none";
         }
@@ -329,6 +375,18 @@ tiklama.play();
         var tiklama = new Audio("tiklama.mp3");
 tiklama.play();
         document.body.style.fontSize = document.getElementById("byt").value + "px";
+    }
+    function KLN4(){
+        var tiklama = new Audio("tiklama.mp3");
+tiklama.play();
+        if(tklm2 == "yk"){
+            tklm2 = "evt";
+            document.getElementById("hftsn1").innerHTML = "Haftasonu zil ve tenefüs olmasın.";
+        }
+        else if(tklm2 == "evt"){
+            tklm2 = "yk";
+            document.getElementById("hftsn1").innerHTML = "Haftasonu zil ve tenefüs olsun.";
+        }
     }
     function KLN3(){
         var tiklama = new Audio("tiklama.mp3");
@@ -389,6 +447,62 @@ tiklama.play();
     zormu = "yes";
         }
     }
+        function KNT(){
+            if(pr1 >= 1000){
+                pr1 -= 1000;
+                oy += 5;
+                it += 2;
+                document.getElementById("pr").innerHTML = pr1;
+        document.getElementById("oy").innerHTML = oy + "%";
+        document.getElementById("it").innerHTML = it;
+        document.getElementById("tnfs").style.display = "none";
+            }
+        else{
+            document.getElementById("tnfs").style.display = "none";
+        }
+        }
+        function FTBL(){
+            var random5 = Math.random();
+            if(random5 > 0.5){
+                oy += 3;
+        document.getElementById("oy").innerHTML = oy + "%";
+        document.getElementById("tnfs").style.display = "none";
+            }
+        else{
+            document.getElementById("tnfs").style.display = "none";
+        }
+        }
+        function AKIN(){
+            var random5 = Math.random();
+            var mars = new Audio("mars1.mp3");
+            mars.volume = 1;
+            mars.play();
+            if(random5 > 0.3){
+                hi -= 50;
+                oy += 20;
+                it += 10;
+                document.getElementById("hi").innerHTML = hi + "%";
+        document.getElementById("oy").innerHTML = oy + "%";
+        document.getElementById("it").innerHTML = it;
+        document.getElementById("kcvp").innerHTML = "Kerem: Vaybe, Huzeyfe gerçekten başarılı bir başkansın maşAllah A Şubesinin Fethi ne zaman :)";
+        document.getElementById("ocvp").innerHTML = "Ömer Asaf:ben sana diyorum bak işe yarıyor";
+        document.getElementById("mcvp").innerHTML = "Mahmut: Huzeyfe, yaptığın kötü birşey hocalarla aranı kötüleştirme";
+        console.log("Kerem:Mahmut torpillisin mahmut yalakasın MAHMUT.Mahmut:Kerem seni hocaya şikayet edeceğim.");
+        document.getElementById("hcvp").innerHTML = "Hamza: Deseydin ya Huzeyfe C şubesindekileri toplar birlikte akın yapardık :)";
+        document.getElementById("fcvp").innerHTML = "Furkan: Hocaam huzeyfede yaramazlık yapıyoor.";
+        document.getElementById("ycvp").innerHTML = "Yağız: Huzeyfe, biliyorsun bende türkçeyi senin kadar iyi biliyorum sırf canım istediğinden ingilizce konuşuyorum.Seni tebrik ederim huzeyfe.";
+        document.getElementById("tnfs").style.display = "none";
+            }
+        else{
+            hi -= 50;
+                oy -= 20;
+                it -= 10;
+                document.getElementById("hi").innerHTML = hi + "%";
+        document.getElementById("oy").innerHTML = oy + "%";
+        document.getElementById("it").innerHTML = it;
+            document.getElementById("tnfs").style.display = "none";
+        }
+        }
         function BOS(){
             var tiklama = new Audio("tiklama.mp3");
 tiklama.play();
@@ -470,7 +584,7 @@ o = "y";
         oy += 2;
         document.getElementById("oy").innerHTML = oy;
         document.getElementById("a8").style.display = "none";
-        if(random < 0.5){
+        if(random3 < 0.5){
     it += 1;
         document.getElementById("it").innerHTML = it;
         }
@@ -483,7 +597,7 @@ o = "y";
         it += 1;
         document.getElementById("it").innerHTML = it;
         document.getElementById("a8").style.display = "none";
-        if(random > 0.5){
+        if(random3 > 0.5){
     it += 1;
         document.getElementById("it").innerHTML = it;
         }
@@ -567,6 +681,29 @@ tiklama.play();
         }
         else if(random2 > 0.1 || fa <= 49){
             document.getElementById("fcvp").innerHTML = "Furkan: Hayır Huzeyfe sana niye yardım edeyim?";
+        }
+    }
+    function FS4(){
+        var tiklama = new Audio("tiklama.mp3");
+tiklama.play();
+        var random7 = Math.floor(Math.random()* 6);
+        if(random7 == 1){
+        document.getElementById("fcvp").innerHTML = "Furkan: Hatice hoca.Matematik hocası eskiden Faden hoca vardı daha beterdi huzeyfe iyi ki gitti.";
+        }
+        else if(random7 == 2){
+        document.getElementById("fcvp").innerHTML = "Furkan: Abdurrahman hoca.Sosyal hocası zaten kötü.";
+        }
+        else if(random7 == 3){
+        document.getElementById("fcvp").innerHTML = "Furkan: Sebil hoca.Arapça hocası.";
+        }
+        else if(random7 == 4){
+        document.getElementById("fcvp").innerHTML = "Furkan: Esra hoca.Din hocası.";
+        }
+        else if(random7 == 5){
+        document.getElementById("fcvp").innerHTML = "Furkan: Sanane.";
+        }
+        else if(random7 == 6){
+        document.getElementById("fcvp").innerHTML = "Furkan: Tüm Hocalardan nefret ediyorum.";
         }
     }
     function SR1K(){
@@ -720,7 +857,7 @@ tiklama.play();
         document.getElementById("kcvp").innerHTML = 'Kerem: Olur Huzeyfe. \n print("") = yazı yazmaya pythonda yarar.';
         setTimeout(function(){
         var soru2 = prompt("Python ile merhaba dünya yazdır.");
-        if (soru2.toLowerCase() == 'print("merhaba dünya")'){
+        if (soru2 == 'print("merhaba dünya")'){
             yzlmblm = "evt";
             ki += 10;
             yi += 4;
@@ -735,7 +872,6 @@ tiklama.play();
             document.getElementById("kcvp").innerHTML = 'Kerem: Doğru Bildin Tebrikler!';
         }
         else{
-            yzlmblm = "evt";
             document.getElementById("kcvp").innerHTML = 'yanlış.';
         }
         }, 5000);
@@ -965,10 +1101,20 @@ tiklama.play();
         document.getElementById("ka").innerHTML = ki;
             }
         }
+        function YS3(){
+        var tiklama = new Audio("tiklama.mp3");
+tiklama.play();
+var random9 = Math.random();
+document.getElementById("ycvp").innerHTML = "Yağız: Evet Huzeyfe, Türkçe elbette biliyorumda sen bilmiyon mu kaç aylık sınıf arkadaşıyız .d ingilizce konuşmamın sebebi ise daha güzel hissettirmesi.";
+if(random9 < 0.05 && navigator.language == "tr-TR"){
+    document.getElementById("ycvp").innerHTML = "Yağız: Evet Aynı senin gibi çünkü tarayıcının dilide türkçe.";
+}
+        }
         function HS1(){
             var tiklama = new Audio("tiklama.mp3");
 tiklama.play();
-if(ha >= 50){
+var random8 = Math.random();
+if(ha >= 50 && random8 < 0.2){
     document.getElementById("hcvp").innerHTML = "Hamza: Olur Huzeyfe.";
     it += 2;
     yi -= 1;
